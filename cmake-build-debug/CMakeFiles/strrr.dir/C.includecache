@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/1/CLionProjects/str/string/tasks/tasks.c
+tasks.h
+C:/Users/1/CLionProjects/str/string/tasks/tasks.h
+
+C:/Users/1/CLionProjects/str/string/tasks/tasks.h
+

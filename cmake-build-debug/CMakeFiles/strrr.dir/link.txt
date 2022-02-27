@@ -1,0 +1,2 @@
+C:\mingw\mingw32\bin\ar.exe qc libstrrr.a CMakeFiles/strrr.dir/string/string_.c.obj CMakeFiles/strrr.dir/string/tasks/tasks.c.obj
+C:\mingw\mingw32\bin\ranlib.exe libstrrr.a
