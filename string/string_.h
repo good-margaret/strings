@@ -34,4 +34,8 @@ void removeSpaces(char *s);
 void assertString(const char *expected, char *got,
                   char const *fileName, char const *funcName, int line);
 
+void removeAdjacentEqualLetters(char *s);
+
+void removeExtraSpaces(char *s);
+
 #endif //STR_STRING__H

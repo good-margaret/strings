@@ -35,14 +35,14 @@ char *findSpace(char *begin) {
 }
 
 char *findNonSpaceReverse(char *rbegin, const char *rend) {
-    while (rbegin != rend && *rbegin == ' ')
+    while (rbegin > rend && *rbegin == ' ')
         rbegin--;
 
     return rbegin;
 }
 
 char *findSpaceReverse(char *rbegin, const char *rend) {
-    while (rbegin != rend && !isspace(*rbegin))
+    while (rbegin > rend && !isspace(*rbegin))
         rbegin--;
 
     return rbegin;
@@ -54,12 +54,12 @@ int strcmp_(const char *lhs, const char *rhs) {
         rhs++;
     }
 
-    return lhs - rhs;
+    return *lhs - *rhs;
 }
 
 char *copy(const char *beginSource, const char *endSource,
            char *beginDestination) {
-    while (beginSource != endSource)
+    while (beginSource < endSource)
         *beginDestination++ = *beginSource++;
 
     return beginDestination;
@@ -67,18 +67,24 @@ char *copy(const char *beginSource, const char *endSource,
 
 char *copyIf(char *beginSource, const char *endSource,
              char *beginDestination, int (*f)(char)) {
-    while (beginSource != endSource)
+    while (beginSource < endSource) {
         if (f(*beginSource))
-            *beginDestination++ = *beginSource++;
+            *beginDestination++ = *beginSource;
+
+        beginSource++;
+    }
 
     return beginDestination;
 }
 
 char *copyIfReverse(char *rbeginSource, const char *rendSource,
                     char *beginDestination, int (*f)(char)) {
-    while (rbeginSource != rendSource)
+    while (rbeginSource > rendSource) {
         if (f(*rbeginSource))
-            *beginDestination++ = *rbeginSource--;
+            *beginDestination++ = *rbeginSource;
+
+        rbeginSource--;
+    }
 
     return beginDestination;
 }
@@ -97,11 +103,34 @@ void assertString(const char *expected, char *got,
     if (strcmp_(expected, got)) {
         fprintf(stderr, " File %s\n", fileName);
         fprintf(stderr, "%s - failed on line %d\n", funcName, line);
-        fprintf(stderr, " Expected : \"%s \"\n", expected);
+        fprintf(stderr, " Expected : \"%s\"\n", expected);
         fprintf(stderr, "Got: \"%s\"\n\n", got);
     } else
         fprintf(stderr, "%s - OK\n", funcName);
 }
 
+int isUnique (const char *x) {
+    return *x != *(x + 1);
+}
 
+char *copyIfV2(char *beginSource, const char *endSource,
+             char *beginDestination, int (*f)(const char*)) {
+    while (beginSource < endSource) {
+        if (f(beginSource))
+            *beginDestination++ = *beginSource;
 
+        beginSource++;
+    }
+
+    return beginDestination;
+}
+
+void removeAdjacentEqualLetters(char *s) {
+    char *destination = copyIfV2(s, s + strlen_(s), s, isUnique);
+    *destination = '\0';
+}
+
+void removeExtraSpaces(char *s) {
+    char *destination = copyIf(findSpace(s) + 1, s + strlen_(s), findSpace(s) + 1, isNotSpace);
+    *destination = '\0';
+}
