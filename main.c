@@ -112,11 +112,36 @@ void test_removeExtraSpaces() {
     test_removeExtraSpaces_3();
 }
 
+void test_changeWordsSequence_1() {
+    char s[] = "1a2b3c";
+    changeWordsSequence(s);
+    ASSERT_STRING("321abc", s);
+}
+
+void test_changeWordsSequence_2() {
+    char s[] = "1a2b3c avra27 om 54321";
+    changeWordsSequence(s);
+    ASSERT_STRING("321abc 72avra om 12345", s);
+}
+
+void test_changeWordsSequence_3() {
+    char s[] = "\n1a2b3c \t\naa27 \to\n";
+    changeWordsSequence(s);
+    ASSERT_STRING("\n321abc \t\n72aa \to\n", s);
+}
+
+void test_changeWordsSequence() {
+    test_changeWordsSequence_1();
+    test_changeWordsSequence_2();
+    test_changeWordsSequence_3();
+}
+
 void test() {
     test_strcmp();
     test_removeSpaces();
     test_removeAdjacentEqualLetters();
     test_removeExtraSpaces();
+    test_changeWordsSequence();
 }
 
 int main() {

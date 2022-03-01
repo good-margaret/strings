@@ -15,4 +15,6 @@ ctype.h
 C:/Users/1/CLionProjects/str/string/string_.h
 stdio.h
 -
+limits.h
+-
 
