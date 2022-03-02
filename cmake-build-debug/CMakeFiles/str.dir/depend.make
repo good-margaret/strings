@@ -3,10 +3,12 @@
 
 CMakeFiles/str.dir/main.c.obj: \
  ../main.c \
- ../string/string_.h
+ ../string/string_.h \
+ ../string/tasks/tasks.h
 CMakeFiles/str.dir/string/string_.c.obj: \
  ../string/string_.c \
  ../string/string_.h
 CMakeFiles/str.dir/string/tasks/tasks.c.obj: \
+ ../string/string_.h \
  ../string/tasks/tasks.c \
  ../string/tasks/tasks.h

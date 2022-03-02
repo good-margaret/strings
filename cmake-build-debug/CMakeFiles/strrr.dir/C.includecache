@@ -17,4 +17,20 @@ stdio.h
 -
 limits.h
 -
+stdbool.h
+-
+
+C:/Users/1/CLionProjects/str/string/tasks/tasks.c
+tasks.h
+C:/Users/1/CLionProjects/str/string/tasks/tasks.h
+ctype.h
+-
+
+C:/Users/1/CLionProjects/str/string/tasks/tasks.h
+stdbool.h
+-
+stdio.h
+-
+../../string/string_.h
+C:/Users/1/CLionProjects/str/string/string_.h
 

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "string/string_.h"
+#include "string/tasks/tasks.h"
 #include <assert.h>
 
 
@@ -136,12 +137,72 @@ void test_changeWordsSequence() {
     test_changeWordsSequence_3();
 }
 
+void test_changeWordsSequenceFirstLettersThenReverseNumbers_1() {
+    char s[] = "1a2b3c";
+    changeWordsSequenceFirstLettersThenReverseNumbers(s);
+    ASSERT_STRING("abc321", s);
+}
+
+void test_changeWordsSequenceFirstLettersThenReverseNumbers_2() {
+    char s[] = "1a2b3c avra27 om 54321";
+    changeWordsSequenceFirstLettersThenReverseNumbers(s);
+    ASSERT_STRING("abc321 avra72 om 12345", s);
+}
+
+void test_changeWordsSequenceFirstLettersThenReverseNumbers_3() {
+    char s[] = "\n1a2b3c \t\naa27 \to\n";
+    changeWordsSequenceFirstLettersThenReverseNumbers(s);
+    ASSERT_STRING("\nabc321 \t\naa72 \to\n", s);
+}
+
+void test_changeWordsSequenceFirstLettersThenReverseNumbers() {
+    test_changeWordsSequenceFirstLettersThenReverseNumbers_1();
+    test_changeWordsSequenceFirstLettersThenReverseNumbers_2();
+    test_changeWordsSequenceFirstLettersThenReverseNumbers_3();
+}
+
+void test_changeDigitsToNSpaces_1() {
+    char s[] = "1ma3r2go1";
+    changeDigitsToNSpaces(s);
+    ASSERT_STRING(" ma   r  go ", s);
+}
+
+void test_changeDigitsToNSpaces_2() {
+    char s[] = "margo";
+    changeDigitsToNSpaces(s);
+    ASSERT_STRING("margo", s);
+}
+
+void test_changeDigitsToNSpaces_3() {
+    char s[] = "123";
+    changeDigitsToNSpaces(s);
+    ASSERT_STRING("      ", s);
+}
+
+void test_changeDigitsToNSpaces() {
+    test_changeDigitsToNSpaces_1();
+    test_changeDigitsToNSpaces_2();
+    test_changeDigitsToNSpaces_3();
+}
+
+void test_replace() {
+    char s[] = "a a b";
+    char w1 = 'a';
+    char w2 = 'c';
+
+    replace(s, &w1, &w2);
+    ASSERT_STRING("c c b", s);
+}
+
 void test() {
     test_strcmp();
     test_removeSpaces();
     test_removeAdjacentEqualLetters();
     test_removeExtraSpaces();
     test_changeWordsSequence();
+    test_changeWordsSequenceFirstLettersThenReverseNumbers();
+    test_changeDigitsToNSpaces();
+    test_replace();
 }
 
 int main() {

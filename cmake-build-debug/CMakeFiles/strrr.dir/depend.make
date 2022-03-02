@@ -5,5 +5,6 @@ CMakeFiles/strrr.dir/string/string_.c.obj: \
  ../string/string_.c \
  ../string/string_.h
 CMakeFiles/strrr.dir/string/tasks/tasks.c.obj: \
+ ../string/string_.h \
  ../string/tasks/tasks.c \
  ../string/tasks/tasks.h
