@@ -345,6 +345,69 @@ void test_areNonDecreasingString() {
     test_areNonDecreasingString_8();
 }
 
+void test_getPalindromeWordsAmount_1() {
+    char s[] = "aa";
+
+    if (getPalindromeWordsAmount(s) == 1)
+        fprintf(stderr, "%s - OK\n", __FUNCTION__);
+    else {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+    }
+}
+
+void test_getPalindromeWordsAmount_2() {
+    char s[] = "ab";
+
+    if (getPalindromeWordsAmount(s) == 0)
+        fprintf(stderr, "%s - OK\n", __FUNCTION__);
+    else {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+    }
+}
+
+void test_getPalindromeWordsAmount_3() {
+    char s[] = "aca";
+
+    if (getPalindromeWordsAmount(s) == 1)
+        fprintf(stderr, "%s - OK\n", __FUNCTION__);
+    else {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+    }
+}
+
+void test_getPalindromeWordsAmount_4() {
+    char s[] = "aa,abacaba,wow";
+
+    if (getPalindromeWordsAmount(s) == 3)
+        fprintf(stderr, "%s - OK\n", __FUNCTION__);
+    else {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+    }
+}
+
+void test_getPalindromeWordsAmount_5() {
+    char s[] = "aa,abac,wow";
+
+    if (getPalindromeWordsAmount(s) == 2)
+        fprintf(stderr, "%s - OK\n", __FUNCTION__);
+    else {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+    }
+}
+
+void test_getPalindromeWordsAmount() {
+    test_getPalindromeWordsAmount_1();
+    test_getPalindromeWordsAmount_2();
+    test_getPalindromeWordsAmount_3();
+    test_getPalindromeWordsAmount_4();
+    test_getPalindromeWordsAmount_5();
+}
+
 void test() {
     test_strcmp();
     test_removeSpaces();
@@ -355,14 +418,15 @@ void test() {
     test_changeDigitsToNSpaces();
     test_replace();
     test_areNonDecreasingString();
+    test_getPalindromeWordsAmount();
 }
 
 
 int main() {
     //test();
-
-    char s[] = "aa ab ac";
-    reverseWords(s);
+    test_getPalindromeWordsAmount();
+    //char s[] = "aa ab ac";
+    //reverseWords(s);
 
     return 0;
 }

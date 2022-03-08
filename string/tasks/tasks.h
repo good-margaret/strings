@@ -53,4 +53,6 @@ void getBagOfWords(BagOfWords *bag, char *s);
 
 void reverseWords(char *s);
 
+int getPalindromeWordsAmount(char *s);
+
 #endif //STR_TASKS_H

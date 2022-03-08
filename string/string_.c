@@ -14,7 +14,7 @@ size_t strlen_(const char *begin) {
     return end - begin;
 }
 
-char *find(char *begin, const char *end, char ch) {
+char *find(char *begin, const char *end, int ch) {
     while (begin != end && *begin != ch)
         begin++;
 

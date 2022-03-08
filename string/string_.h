@@ -27,7 +27,7 @@ bool getWord(char *beginSearch, WordDescriptor *word);
 
 size_t strlen_(const char *begin);
 
-char *find(char *begin, const char *end, char ch);
+char *find(char *begin, const char *end, int ch);
 
 char *findNonSpace(char *begin);
 

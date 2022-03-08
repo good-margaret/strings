@@ -208,9 +208,45 @@ void reverseWords(char *s) {
     for (size_t i = _bag.size; i > 0; i--) {
         char *wordBegin = _bag.words[i - 1].begin;
 
-         while(wordBegin < _bag.words[i - 1].end)
-             printf("%c", *wordBegin++);
+        while (wordBegin < _bag.words[i - 1].end)
+            printf("%c", *wordBegin++);
 
-         printf("\n");
+        printf("\n");
     }
+}
+
+bool getWordComas(char *s, WordDescriptor *word) {
+    while (*s == ',')
+        s++;
+
+    word->begin = s;
+
+    if (*word->begin == '\0')
+        return false;
+
+    word->end = find(s, s + strlen_(s), ',');
+
+    //printf("%d\n", word->end - word->begin);
+
+    return true;
+}
+
+bool checkIfPalindrome(WordDescriptor word) {
+    while (word.begin < word.end - 1)
+        if (*word.begin++ != *(word.end-- - 1))
+            return false;
+
+    return true;
+}
+
+int getPalindromeWordsAmount(char *s) {
+    int nPalindromes = 0;
+
+    WordDescriptor word;
+    while (getWordComas(s, &word)) {
+        nPalindromes += checkIfPalindrome(word);
+        s = word.end;
+    }
+
+    return nPalindromes;
 }
