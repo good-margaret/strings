@@ -35,4 +35,8 @@ void replace(char *source, char *w1, char *w2);
 
 void removeSpaces(char *s);
 
+int compareWords(WordDescriptor w1, WordDescriptor w2);
+
+bool areNonDecreasingString(char *beginString);
+
 #endif //STR_TASKS_H

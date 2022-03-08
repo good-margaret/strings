@@ -7,10 +7,10 @@
 #include <memory.h>
 #include <malloc.h>
 
-char *createStringFromArray (char s[]) {
-    char *str = (char*) malloc(MAX_STRING_SIZE);
+char *createStringFromArray(char s[]) {
+    char *str = (char *) malloc(MAX_STRING_SIZE);
     for (int i = 0; i < strlen_(s); i++)
-       str[i] = s[i];
+        str[i] = s[i];
 
     str[strlen_(s)] = '\0';
 
@@ -125,7 +125,7 @@ void changeDigitsToNSpaces(char *begin) {
     *begin = '\0';
 }
 
-bool areEqualWords (WordDescriptor w1, WordDescriptor w2) {
+bool areEqualWords(WordDescriptor w1, WordDescriptor w2) {
     size_t w1Size = w1.end - w1.begin;
     size_t w2Size = w2.end - w2.begin;
 
@@ -163,4 +163,28 @@ void replace(char *source, char *w1, char *w2) {
 
     //recPtr = copy(readPtr, readPtr + strlen_(readPtr), recPtr);
     *recPtr = '\0';
+}
+
+int compareWords(WordDescriptor w1, WordDescriptor w2) {
+    return memcmp(w1.begin, w2.begin, w1.end - w1.begin);
+}
+
+bool areNonDecreasingString(char *beginString) {
+    WordDescriptor word1, word2;
+
+    if (!getWord(beginString, &word1))
+        return true;
+
+    char *iRead = word1.end;
+
+    while (getWord(iRead, &word2)) {
+        if (compareWords(word1, word2) > 0)
+            return false;
+
+        iRead = word2.end;
+
+        word1 = word2;
+    }
+
+    return true;
 }

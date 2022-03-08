@@ -246,6 +246,105 @@ void test_replace() {
      test_replace_5();
 }
 
+void test_areNonDecreasingString_1() {
+    char s[] = "a b";
+
+    if (areNonDecreasingString(s))
+        fprintf(stderr, "%s - OK\n", __FUNCTION__);
+    else {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+    }
+}
+
+void test_areNonDecreasingString_2() {
+    char s[] = "ab b";
+
+    if (areNonDecreasingString(s))
+        fprintf(stderr, "%s - OK\n", __FUNCTION__);
+    else {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+    }
+}
+
+void test_areNonDecreasingString_3() {
+    char s[] = "a a a";
+
+    if (areNonDecreasingString(s))
+        fprintf(stderr, "%s - OK\n", __FUNCTION__);
+    else {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+    }
+}
+
+void test_areNonDecreasingString_4() {
+    char s[] = "a b c";
+
+    if (areNonDecreasingString(s))
+        fprintf(stderr, "%s - OK\n", __FUNCTION__);
+    else {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+    }
+}
+
+void test_areNonDecreasingString_5() {
+    char s[] = "b a";
+
+    if (!areNonDecreasingString(s))
+        fprintf(stderr, "%s - OK\n", __FUNCTION__);
+    else {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+    }
+}
+
+void test_areNonDecreasingString_6() {
+    char s[] = "";
+
+    if (areNonDecreasingString(s))
+        fprintf(stderr, "%s - OK\n", __FUNCTION__);
+    else {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
+    }
+}
+
+void test_areNonDecreasingString_7() {
+    char s[] = "aa ab ac";
+
+    if (areNonDecreasingString(s))
+        fprintf(stderr, "%s - OK\n", __FUNCTION__);
+    else {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+    }
+}
+
+void test_areNonDecreasingString_8() {
+    char s[] = "aa ab aa";
+
+    if (!areNonDecreasingString(s))
+        fprintf(stderr, "%s - OK\n", __FUNCTION__);
+    else {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+    }
+}
+
+void test_areNonDecreasingString() {
+    test_areNonDecreasingString_1();
+    test_areNonDecreasingString_2();
+    test_areNonDecreasingString_3();
+    test_areNonDecreasingString_4();
+    test_areNonDecreasingString_5();
+    test_areNonDecreasingString_6();
+    test_areNonDecreasingString_7();
+    test_areNonDecreasingString_8();
+}
+
 void test() {
     test_strcmp();
     test_removeSpaces();
@@ -255,12 +354,15 @@ void test() {
     test_changeWordsSequenceFirstLettersThenReverseNumbers();
     test_changeDigitsToNSpaces();
     test_replace();
+    test_areNonDecreasingString();
 }
+
 
 int main() {
     test();
 
-    printf("Hello, World!\n");
+    char n = '\0';
+    printf("%d\n", n);
 
     return 0;
 }
