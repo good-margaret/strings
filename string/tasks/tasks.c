@@ -188,3 +188,29 @@ bool areNonDecreasingString(char *beginString) {
 
     return true;
 }
+
+void getBagOfWords(BagOfWords *bag, char *s) {
+    WordDescriptor word;
+
+    WordDescriptor *wordAddress = bag->words;
+
+    while (getWord(s, &word)) {
+        *wordAddress++ = word;
+        s = word.end;
+    }
+
+    bag->size = wordAddress - bag->words;
+}
+
+void reverseWords(char *s) {
+    getBagOfWords(&_bag, s);
+
+    for (size_t i = _bag.size; i > 0; i--) {
+        char *wordBegin = _bag.words[i - 1].begin;
+
+         while(wordBegin < _bag.words[i - 1].end)
+             printf("%c", *wordBegin++);
+
+         printf("\n");
+    }
+}

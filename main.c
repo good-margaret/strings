@@ -359,10 +359,10 @@ void test() {
 
 
 int main() {
-    test();
+    //test();
 
-    char n = '\0';
-    printf("%d\n", n);
+    char s[] = "aa ab ac";
+    reverseWords(s);
 
     return 0;
 }
