@@ -21,6 +21,7 @@ typedef struct WordDescriptor {
 
 char stringBuffer [MAX_STRING_SIZE + 1];
 
+char *createStringFromArray (char s[]);
 
 bool getWord(char *beginSearch, WordDescriptor *word);
 

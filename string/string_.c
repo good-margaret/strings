@@ -4,6 +4,7 @@
 
 #include "string_.h"
 #include <ctype.h>
+#include <memory.h>
 
 size_t strlen_(const char *begin) {
     const char *end = begin;
@@ -21,7 +22,7 @@ char *find(char *begin, const char *end, char ch) {
 }
 
 char *findNonSpace(char *begin) {
-    while (isspace(*begin))
+    while (*begin != '\0' && isspace(*begin))
         begin++;
 
     return begin;
@@ -35,7 +36,7 @@ char *findSpace(char *begin) {
 }
 
 char *findNonSpaceReverse(char *rbegin, const char *rend) {
-    while (rbegin > rend && *rbegin == ' ')
+    while (rbegin > rend && isspace(*rbegin))
         rbegin--;
 
     return rbegin;
@@ -49,9 +50,8 @@ char *findSpaceReverse(char *rbegin, const char *rend) {
 }
 
 int strcmp_(const char *lhs, const char *rhs) {
-    while (*lhs != '\0' && *rhs != '\0' && *lhs == *rhs) {
-        lhs++;
-        rhs++;
+    while (*lhs != '\0' && *lhs == *rhs) {
+        lhs++, rhs++;
     }
 
     return *lhs - *rhs;
@@ -59,10 +59,12 @@ int strcmp_(const char *lhs, const char *rhs) {
 
 char *copy(const char *beginSource, const char *endSource,
            char *beginDestination) {
-    while (beginSource < endSource)
-        *beginDestination++ = *beginSource++;
+    memcpy(beginDestination, beginSource, endSource - beginSource);
 
-    return beginDestination;
+    /*char *endDestination = beginDestination + (endSource - beginSource);
+    *endDestination = '\0';*/
+
+    return beginDestination + (endSource - beginSource);
 }
 
 char *copyIf(char *beginSource, const char *endSource,

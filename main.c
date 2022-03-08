@@ -2,7 +2,7 @@
 #include "string/string_.h"
 #include "string/tasks/tasks.h"
 #include <assert.h>
-
+#include <malloc.h>
 
 #define ASSERT_STRING(expected , got) assertString(expected, got , __FILE__, __FUNCTION__, __LINE__)
 
@@ -185,13 +185,65 @@ void test_changeDigitsToNSpaces() {
     test_changeDigitsToNSpaces_3();
 }
 
-void test_replace() {
-    char s[] = "a a b";
-    char w1 = 'a';
-    char w2 = 'c';
+void test_replace_1() {
+    char s[] = "a";
+    char w1[] = "a";
+    char w2[] = "c";
 
-    replace(s, &w1, &w2);
+    replace(s, w1, w2);
+    ASSERT_STRING("c", s);
+}
+
+void test_replace_2() {
+    char *s = createStringFromArray("a");
+
+    char w1[] = "a";
+    char w2[] = "cc";
+
+    replace(s, w1, w2);
+    ASSERT_STRING("cc", s);
+
+    free(s);
+}
+
+void test_replace_3() {
+    char *s = createStringFromArray("a a b");
+    //char s[] = "a a b";
+    char *w1 = "a";
+    char *w2 = "c";
+
+    replace(s, w1, w2);
     ASSERT_STRING("c c b", s);
+}
+
+void test_replace_4() {
+    char *s = createStringFromArray("\tar arr ar tar ");
+    //char s[] = "\tar arr ar tar ";
+    char w1[] = "ar";
+    char w2[] = "r";
+
+    replace(s, w1, w2);
+    ASSERT_STRING("\tr arr r tar ", s);
+}
+
+void test_replace_5() {
+    char *s = createStringFromArray("a aa aaa a a ");
+
+    char w1[] = "a";
+    char w2[] = "cc";
+
+    replace(s, w1, w2);
+    ASSERT_STRING("cc aa aaa cc cc ", s);
+
+    free(s);
+}
+
+void test_replace() {
+     test_replace_1();
+     test_replace_2();
+     test_replace_3();
+     test_replace_4();
+     test_replace_5();
 }
 
 void test() {

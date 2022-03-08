@@ -4,6 +4,18 @@
 
 #include "tasks.h"
 #include <ctype.h>
+#include <memory.h>
+#include <malloc.h>
+
+char *createStringFromArray (char s[]) {
+    char *str = (char*) malloc(MAX_STRING_SIZE);
+    for (int i = 0; i < strlen_(s); i++)
+       str[i] = s[i];
+
+    str[strlen_(s)] = '\0';
+
+    return str;
+}
 
 int isNotSpace(char a) {
     return !isspace(a);
@@ -114,9 +126,10 @@ void changeDigitsToNSpaces(char *begin) {
 }
 
 bool areEqualWords (WordDescriptor w1, WordDescriptor w2) {
-    *w1.end = '\0';
-    *w2.end = '\0';
-    return strcmp_(w1.begin, w2.begin) == 0;
+    size_t w1Size = w1.end - w1.begin;
+    size_t w2Size = w2.end - w2.begin;
+
+    return w1Size == w2Size && memcmp(w1.begin, w2.begin, w1Size) == 0;
 }
 
 void replace(char *source, char *w1, char *w2) {
@@ -130,27 +143,24 @@ void replace(char *source, char *w1, char *w2) {
         readPtr = source;
         recPtr = source;
     } else {
-        copy(source, source + strlen_(source), stringBuffer);
+        copy(source, source + strlen_(source) + 1, stringBuffer);
         readPtr = stringBuffer;
         recPtr = source;
     }
 
+    recPtr = copy(readPtr, findNonSpace(readPtr), recPtr);
+
     WordDescriptor word;
     while (getWord(readPtr, &word)) {
-        //printf("%d\n", areEqualWords(word, word1));
-        /*for (int *i = word.begin; i < word.end; i++) {
-            printf("%c", *i);
-        }
-        printf("\n");*/
-
         if (areEqualWords(word, word1))
             recPtr = copy(word2.begin, word2.end, recPtr);
         else
-            recPtr = copy(readPtr, word.end, recPtr);
+            recPtr = copy(word.begin, word.end, recPtr);
 
         readPtr = word.end;
+        recPtr = copy(readPtr, findNonSpace(readPtr), recPtr);
     }
 
-    char *end = copy(readPtr, readPtr + strlen_(readPtr), recPtr);
-    *end = '\0';
+    //recPtr = copy(readPtr, readPtr + strlen_(readPtr), recPtr);
+    *recPtr = '\0';
 }

@@ -15,11 +15,7 @@ string/tasks/tasks.h
 C:/Users/1/CLionProjects/str/string/tasks/tasks.h
 assert.h
 -
-
-C:/Users/1/CLionProjects/str/string/string_.c
-string_.h
-C:/Users/1/CLionProjects/str/string/string_.h
-ctype.h
+malloc.h
 -
 
 C:/Users/1/CLionProjects/str/string/string_.h
@@ -28,12 +24,6 @@ stdio.h
 limits.h
 -
 stdbool.h
--
-
-C:/Users/1/CLionProjects/str/string/tasks/tasks.c
-tasks.h
-C:/Users/1/CLionProjects/str/string/tasks/tasks.h
-ctype.h
 -
 
 C:/Users/1/CLionProjects/str/string/tasks/tasks.h
