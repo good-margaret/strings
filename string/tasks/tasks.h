@@ -55,4 +55,6 @@ void reverseWords(char *s);
 
 int getPalindromeWordsAmount(char *s);
 
+char *blendStrings(char *s1, char *s2);
+
 #endif //STR_TASKS_H

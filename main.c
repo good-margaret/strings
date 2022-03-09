@@ -214,6 +214,8 @@ void test_replace_3() {
 
     replace(s, w1, w2);
     ASSERT_STRING("c c b", s);
+
+    free(s);
 }
 
 void test_replace_4() {
@@ -224,6 +226,8 @@ void test_replace_4() {
 
     replace(s, w1, w2);
     ASSERT_STRING("\tr arr r tar ", s);
+
+    free(s);
 }
 
 void test_replace_5() {
@@ -408,6 +412,44 @@ void test_getPalindromeWordsAmount() {
     test_getPalindromeWordsAmount_5();
 }
 
+void test_blendStrings_1() {
+    char s1[] = "a";
+    char s2[] = "b";
+    ASSERT_STRING("a b", blendStrings(s1, s2));
+}
+
+void test_blendStrings_2() {
+    char s1[] = "a aa";
+    char s2[] = "b bb";
+    ASSERT_STRING("a b aa bb", blendStrings(s1, s2));
+}
+
+void test_blendStrings_3() {
+    char s1[] = "a aa aaa";
+    char s2[] = "";
+    ASSERT_STRING("a aa aaa", blendStrings(s1, s2));
+}
+
+void test_blendStrings_4() {
+    char s1[] = "";
+    char s2[] = "b bb";
+    ASSERT_STRING("b bb", blendStrings(s1, s2));
+}
+
+void test_blendStrings_5() {
+    char s1[] = "a aa";
+    char s2[] = "b bb bbb bbbb";
+    ASSERT_STRING("a b aa bb bbb bbbb", blendStrings(s1, s2));
+}
+
+void test_blendStrings() {
+    test_blendStrings_1();
+    test_blendStrings_2();
+    test_blendStrings_3();
+    test_blendStrings_4();
+    test_blendStrings_5();
+}
+
 void test() {
     test_strcmp();
     test_removeSpaces();
@@ -419,12 +461,13 @@ void test() {
     test_replace();
     test_areNonDecreasingString();
     test_getPalindromeWordsAmount();
+    test_blendStrings();
 }
 
 
 int main() {
     //test();
-    test_getPalindromeWordsAmount();
+    test_blendStrings();
     //char s[] = "aa ab ac";
     //reverseWords(s);
 

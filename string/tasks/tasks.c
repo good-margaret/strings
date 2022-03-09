@@ -250,3 +250,31 @@ int getPalindromeWordsAmount(char *s) {
 
     return nPalindromes;
 }
+
+char *blendStrings(char *s1, char *s2) {
+    char s[strlen_(s1) + strlen_(s2) + 1];
+    char *str = s;
+
+    WordDescriptor word1, word2;
+    bool isW1Found, isW2Found;
+    char *beginSearch1 = s1, *beginSearch2 = s2;
+    while ((isW1Found = getWord(beginSearch1, &word1)),
+            (isW2Found = getWord(beginSearch2, &word2)), isW1Found || isW2Found) {
+        if (isW1Found) {
+            str = copy(word1.begin, word1.end, str);
+            *str++ = ' ';
+            beginSearch1 = word1.end;
+        }
+
+        if (isW2Found) {
+            str = copy(word2.begin, word2.end, str);
+            *str++ = ' ';
+            beginSearch2 = word2.end;
+        }
+    }
+
+    *(str - 1) = '\0';
+
+    char *string = s;
+    return string;
+}
