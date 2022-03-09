@@ -97,16 +97,6 @@ void changeWordsSequenceFirstLettersThenReverseNumbers(char *beginString) {
     }
 }
 
-bool getWordReverse(char *rbegin, char *rend, WordDescriptor *word) {
-    word->end = findNonSpaceReverse(rbegin, rend);
-
-    if (word->end == rend)
-        return false;
-
-    word->begin = findSpaceReverse(word->end, rend);
-
-    return true;
-}
 
 void changeDigitsToNSpaces(char *begin) {
     char *endStringBuffer = copy(begin, begin + strlen_(begin), stringBuffer);
@@ -249,6 +239,82 @@ int getPalindromeWordsAmount(char *s) {
     }
 
     return nPalindromes;
+}
+
+
+bool getWordReverse(char *rbegin, char *rend, WordDescriptor *word) {
+    if (rbegin == rend)
+        return false;
+
+    word->end = findNonSpaceReverse(rbegin, rend) + 1;
+
+    if (word->end - 1 == rend)
+        return false;
+
+    word->begin = findSpaceReverse(word->end, rend) + 1;
+
+    for (int i = 0; i < word->end - word->begin; i++) {
+        printf("%c", *(word->begin + i));
+    }
+
+    printf("\n");
+
+    return true;
+}
+
+void reverseWordsOrder(char *s) {
+    *stringBuffer = ' ';
+    memcpy(stringBuffer + 1, s, strlen_(s) + 1);
+    printf("0%s\n", stringBuffer);
+    WordDescriptor word;
+    char *rbegin = stringBuffer + strlen_(stringBuffer);
+    while (getWordReverse(rbegin, stringBuffer, &word)) {
+        printf("1%s   ", word.begin);
+         s = copy(word.begin, word.end, s);
+         *s++ = ' ';
+         rbegin = word.begin - 1;
+        printf("2%s\n", s);
+        //rbegin = word.begin;
+    }
+
+    *(s - 1) = '\0';
+
+    printf("s=%s", s);
+}
+
+bool ifAIsThere(WordDescriptor word) {
+    while (word.begin < word.end) {
+        if (*word.begin == 'A' || *word.begin == 'a')
+            return true;
+
+        word.begin++;
+    }
+
+    return false;
+}
+
+WordBeforeFirstWordWithAReturnCode getWordBeforeFirstWordWithA(char *s, char **beginWordBefore, char **endWordBefore) {
+    WordDescriptor prevWord, word;
+    if(!getWord(s, &prevWord))
+        return EMPTY_STRING;
+
+    if(ifAIsThere(prevWord))
+        return FIRST_WORD_WITH_A;
+
+    char *iRead = prevWord.end;
+    while (getWord(iRead, &word)) {
+        if (ifAIsThere(word)) {
+            *beginWordBefore = prevWord.begin;
+            *endWordBefore = prevWord.end;
+
+            return WORD_FOUND;
+        } else {
+            prevWord = word;
+            iRead = word.end;
+        }
+    }
+
+    return NOT_FOUND_A_WORD_WITH_A;
 }
 
 char *blendStrings(char *s1, char *s2) {

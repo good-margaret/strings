@@ -4,7 +4,7 @@
 #include <assert.h>
 #include <malloc.h>
 
-#define ASSERT_STRING(expected , got) assertString(expected, got , __FILE__, __FUNCTION__, __LINE__)
+#define ASSERT_STRING(expected, got) assertString(expected, got , __FILE__, __FUNCTION__, __LINE__)
 
 void test_removeSpaces_1() {
     char s[] = "1 2 3";
@@ -243,11 +243,11 @@ void test_replace_5() {
 }
 
 void test_replace() {
-     test_replace_1();
-     test_replace_2();
-     test_replace_3();
-     test_replace_4();
-     test_replace_5();
+    test_replace_1();
+    test_replace_2();
+    test_replace_3();
+    test_replace_4();
+    test_replace_5();
 }
 
 void test_areNonDecreasingString_1() {
@@ -257,7 +257,7 @@ void test_areNonDecreasingString_1() {
         fprintf(stderr, "%s - OK\n", __FUNCTION__);
     else {
         fprintf(stderr, " File %s\n", __FILE__);
-        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
     }
 }
 
@@ -268,7 +268,7 @@ void test_areNonDecreasingString_2() {
         fprintf(stderr, "%s - OK\n", __FUNCTION__);
     else {
         fprintf(stderr, " File %s\n", __FILE__);
-        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
     }
 }
 
@@ -279,7 +279,7 @@ void test_areNonDecreasingString_3() {
         fprintf(stderr, "%s - OK\n", __FUNCTION__);
     else {
         fprintf(stderr, " File %s\n", __FILE__);
-        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
     }
 }
 
@@ -290,7 +290,7 @@ void test_areNonDecreasingString_4() {
         fprintf(stderr, "%s - OK\n", __FUNCTION__);
     else {
         fprintf(stderr, " File %s\n", __FILE__);
-        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
     }
 }
 
@@ -301,7 +301,7 @@ void test_areNonDecreasingString_5() {
         fprintf(stderr, "%s - OK\n", __FUNCTION__);
     else {
         fprintf(stderr, " File %s\n", __FILE__);
-        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
     }
 }
 
@@ -323,7 +323,7 @@ void test_areNonDecreasingString_7() {
         fprintf(stderr, "%s - OK\n", __FUNCTION__);
     else {
         fprintf(stderr, " File %s\n", __FILE__);
-        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
     }
 }
 
@@ -334,7 +334,7 @@ void test_areNonDecreasingString_8() {
         fprintf(stderr, "%s - OK\n", __FUNCTION__);
     else {
         fprintf(stderr, " File %s\n", __FILE__);
-        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
     }
 }
 
@@ -356,7 +356,7 @@ void test_getPalindromeWordsAmount_1() {
         fprintf(stderr, "%s - OK\n", __FUNCTION__);
     else {
         fprintf(stderr, " File %s\n", __FILE__);
-        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
     }
 }
 
@@ -367,7 +367,7 @@ void test_getPalindromeWordsAmount_2() {
         fprintf(stderr, "%s - OK\n", __FUNCTION__);
     else {
         fprintf(stderr, " File %s\n", __FILE__);
-        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
     }
 }
 
@@ -378,7 +378,7 @@ void test_getPalindromeWordsAmount_3() {
         fprintf(stderr, "%s - OK\n", __FUNCTION__);
     else {
         fprintf(stderr, " File %s\n", __FILE__);
-        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
     }
 }
 
@@ -389,7 +389,7 @@ void test_getPalindromeWordsAmount_4() {
         fprintf(stderr, "%s - OK\n", __FUNCTION__);
     else {
         fprintf(stderr, " File %s\n", __FILE__);
-        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
     }
 }
 
@@ -400,7 +400,7 @@ void test_getPalindromeWordsAmount_5() {
         fprintf(stderr, "%s - OK\n", __FUNCTION__);
     else {
         fprintf(stderr, " File %s\n", __FILE__);
-        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
     }
 }
 
@@ -450,6 +450,35 @@ void test_blendStrings() {
     test_blendStrings_5();
 }
 
+void test_reverseWordsOrder() {
+    char s[] = "a b";
+    reverseWordsOrder(s);
+    ASSERT_STRING("b a", s);
+}
+
+void testAll_getWordBeforeFirstWordWithA() {
+    char *beginWord, *endWord;
+
+    char s1[] = "";
+    assert (getWordBeforeFirstWordWithA(s1, &beginWord, &endWord) == EMPTY_STRING);
+
+    char s2[] = " ABC";
+    assert (getWordBeforeFirstWordWithA(s2, &beginWord, &endWord)
+            == FIRST_WORD_WITH_A);
+
+    char s3[] = "BC A";
+    assert (getWordBeforeFirstWordWithA(s3, &beginWord, &endWord) == WORD_FOUND);
+
+    char got[MAX_WORD_SIZE];
+    copy(beginWord, endWord, got);
+    got[endWord - beginWord] = '\0';
+    ASSERT_STRING ("BC", got);
+
+    char s4[] = "B Q WE YR OW IUWR ";
+    assert (getWordBeforeFirstWordWithA(s4, &beginWord, &endWord) ==
+            NOT_FOUND_A_WORD_WITH_A);
+}
+
 void test() {
     test_strcmp();
     test_removeSpaces();
@@ -462,12 +491,13 @@ void test() {
     test_areNonDecreasingString();
     test_getPalindromeWordsAmount();
     test_blendStrings();
+    testAll_getWordBeforeFirstWordWithA();
 }
 
 
 int main() {
     //test();
-    test_blendStrings();
+    //test_reverseWordsOrder();
     //char s[] = "aa ab ac";
     //reverseWords(s);
 

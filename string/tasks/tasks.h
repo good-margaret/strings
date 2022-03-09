@@ -18,12 +18,19 @@ typedef struct BagOfWords {
     size_t size;
 } BagOfWords;
 
+typedef enum WordBeforeFirstWordWithAReturnCode {
+    FIRST_WORD_WITH_A,
+    NOT_FOUND_A_WORD_WITH_A,
+    WORD_FOUND,
+    EMPTY_STRING
+} WordBeforeFirstWordWithAReturnCode;
 
 char stringBuffer[MAX_STRING_SIZE + 1];
 
 BagOfWords _bag;
 BagOfWords _bag2;
 
+WordBeforeFirstWordWithAReturnCode getWordBeforeFirstWordWithA(char *s, char **beginWordBefore, char **endWordBefore);
 
 void removeSpaces(char *s);
 
@@ -56,5 +63,7 @@ void reverseWords(char *s);
 int getPalindromeWordsAmount(char *s);
 
 char *blendStrings(char *s1, char *s2);
+
+void reverseWordsOrder(char *s);
 
 #endif //STR_TASKS_H
