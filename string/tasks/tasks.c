@@ -365,6 +365,7 @@ WordDescriptor lastWordInFirstStringInSecondString(char *s1, char *s2) {
     return _bag.words[maxIndex];
 }
 
+
 int compareWordsHardcore(const void *word1, const void *word2) {
     const WordDescriptor *w1 = word1;
     const WordDescriptor *w2 = word2;
