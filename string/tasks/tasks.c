@@ -6,6 +6,7 @@
 #include <ctype.h>
 #include <memory.h>
 #include <malloc.h>
+#include <stdlib.h>
 
 char *createStringFromArray(char s[]) {
     char *str = (char *) malloc(MAX_STRING_SIZE);
@@ -241,45 +242,34 @@ int getPalindromeWordsAmount(char *s) {
     return nPalindromes;
 }
 
-
 bool getWordReverse(char *rbegin, char *rend, WordDescriptor *word) {
-    if (rbegin == rend)
+    if (rbegin <= rend)
         return false;
 
     word->end = findNonSpaceReverse(rbegin, rend) + 1;
-
     if (word->end - 1 == rend)
         return false;
 
-    word->begin = findSpaceReverse(word->end, rend) + 1;
-
-    for (int i = 0; i < word->end - word->begin; i++) {
-        printf("%c", *(word->begin + i));
-    }
-
-    printf("\n");
+    word->begin = findSpaceReverse(word->end - 1, rend) + 1;
 
     return true;
 }
 
 void reverseWordsOrder(char *s) {
-    *stringBuffer = ' ';
-    memcpy(stringBuffer + 1, s, strlen_(s) + 1);
-    printf("0%s\n", stringBuffer);
+    memcpy(stringBuffer, s, strlen_(s) + 1);
+
     WordDescriptor word;
-    char *rbegin = stringBuffer + strlen_(stringBuffer);
-    while (getWordReverse(rbegin, stringBuffer, &word)) {
-        printf("1%s   ", word.begin);
-         s = copy(word.begin, word.end, s);
-         *s++ = ' ';
-         rbegin = word.begin - 1;
-        printf("2%s\n", s);
-        //rbegin = word.begin;
+
+    char *rbegin = stringBuffer + strlen_(stringBuffer) - 1;
+
+    while (getWordReverse(rbegin, stringBuffer - 1, &word)) {
+        memcpy(s, word.begin, word.end - word.begin);
+        s += word.end - word.begin;
+        *s++ = ' ';
+        rbegin = word.begin - 1;
     }
 
     *(s - 1) = '\0';
-
-    printf("s=%s", s);
 }
 
 bool ifAIsThere(WordDescriptor word) {
@@ -295,10 +285,10 @@ bool ifAIsThere(WordDescriptor word) {
 
 WordBeforeFirstWordWithAReturnCode getWordBeforeFirstWordWithA(char *s, char **beginWordBefore, char **endWordBefore) {
     WordDescriptor prevWord, word;
-    if(!getWord(s, &prevWord))
+    if (!getWord(s, &prevWord))
         return EMPTY_STRING;
 
-    if(ifAIsThere(prevWord))
+    if (ifAIsThere(prevWord))
         return FIRST_WORD_WITH_A;
 
     char *iRead = prevWord.end;
@@ -343,4 +333,53 @@ char *blendStrings(char *s1, char *s2) {
 
     char *string = s;
     return string;
+}
+
+void wordDescriptorToString(WordDescriptor word, char *destination) {
+    char *endString = copy(word.begin, word.end, destination);
+    *endString = '\0';
+}
+
+bool isWordInBag(WordDescriptor word, BagOfWords bag) {
+    for (int i = 0; i < bag.size; i++)
+        if (compareWords(word, bag.words[i]) == 0)
+            return true;
+
+    return false;
+}
+
+WordDescriptor lastWordInFirstStringInSecondString(char *s1, char *s2) {
+    getBagOfWords(&_bag, s1);
+    getBagOfWords(&_bag2, s2);
+
+    int maxIndex = -1;
+
+    for (int i = 0; i < _bag.size; i++) {
+        if (isWordInBag(_bag.words[i], _bag2))
+            maxIndex = i;
+    }
+
+    if (maxIndex == -1)
+        fprintf(stderr, "No correlations");
+
+    return _bag.words[maxIndex];
+}
+
+int compareWordsHardcore(const void *word1, const void *word2) {
+    const WordDescriptor *w1 = word1;
+    const WordDescriptor *w2 = word2;
+    return memcmp(w1->begin, w2->begin, w1->end - w1->begin);
+}
+
+bool checkIfRepeatedWordsInString(char *s) {
+    getBagOfWords(&_bag, s);
+
+    qsort(_bag.words, _bag.size, sizeof(WordDescriptor), compareWordsHardcore);
+
+    for (int i = 1; i < _bag.size; i++)
+        if (compareWords(_bag.words[i - 1], _bag.words[i]) == 0)
+            return true;
+
+
+    return false;
 }

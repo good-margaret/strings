@@ -23,6 +23,8 @@ memory.h
 -
 malloc.h
 -
+stdlib.h
+-
 
 C:/Users/1/CLionProjects/str/string/tasks/tasks.h
 stdbool.h

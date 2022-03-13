@@ -66,4 +66,10 @@ char *blendStrings(char *s1, char *s2);
 
 void reverseWordsOrder(char *s);
 
+void wordDescriptorToString(WordDescriptor word, char *destination);
+
+WordDescriptor lastWordInFirstStringInSecondString(char *s1, char *s2);
+
+bool checkIfRepeatedWordsInString(char *s);
+
 #endif //STR_TASKS_H

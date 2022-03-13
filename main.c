@@ -450,10 +450,28 @@ void test_blendStrings() {
     test_blendStrings_5();
 }
 
-void test_reverseWordsOrder() {
-    char s[] = "a b";
+void test_reverseWordsOrder_1() {
+    char s[] = "a";
     reverseWordsOrder(s);
-    ASSERT_STRING("b a", s);
+    ASSERT_STRING("a", s);
+}
+
+void test_reverseWordsOrder_2() {
+    char s[] = " a ";
+    reverseWordsOrder(s);
+    ASSERT_STRING("a", s);
+}
+
+void test_reverseWordsOrder_3() {
+    char s[] = "a b ca";
+    reverseWordsOrder(s);
+    ASSERT_STRING("ca b a", s);
+}
+
+void test_reverseWordsOrder() {
+    test_reverseWordsOrder_1();
+    test_reverseWordsOrder_2();
+    test_reverseWordsOrder_3();
 }
 
 void testAll_getWordBeforeFirstWordWithA() {
@@ -479,6 +497,157 @@ void testAll_getWordBeforeFirstWordWithA() {
             NOT_FOUND_A_WORD_WITH_A);
 }
 
+void test_lastWordInFirstStringInSecondString_1() {
+    char s1[] = "a b c";
+    char s2[] = "a c b";
+    WordDescriptor word = lastWordInFirstStringInSecondString(s1, s2);
+    char string[100];
+    wordDescriptorToString(word, string);
+    ASSERT_STRING ("c", string);
+}
+
+void test_lastWordInFirstStringInSecondString_2() {
+    char s1[] = "a b c";
+    char s2[] = "a n m";
+    WordDescriptor word = lastWordInFirstStringInSecondString(s1, s2);
+    char string[100];
+    wordDescriptorToString(word, string);
+    ASSERT_STRING ("a", string);
+}
+
+void test_lastWordInFirstStringInSecondString_3() {
+    char s1[] = "a b c";
+    char s2[] = "b n m";
+    WordDescriptor word = lastWordInFirstStringInSecondString(s1, s2);
+    char string[100];
+    wordDescriptorToString(word, string);
+    ASSERT_STRING ("b", string);
+}
+
+void test_lastWordInFirstStringInSecondString_4() {
+    char s1[] = "aa ab ac";
+    char s2[] = "ab an am";
+    WordDescriptor word = lastWordInFirstStringInSecondString(s1, s2);
+    char string[100];
+    wordDescriptorToString(word, string);
+    ASSERT_STRING ("ab", string);
+}
+
+void test_lastWordInFirstStringInSecondString() {
+    test_lastWordInFirstStringInSecondString_1();
+    test_lastWordInFirstStringInSecondString_2();
+    test_lastWordInFirstStringInSecondString_3();
+    test_lastWordInFirstStringInSecondString_4();
+}
+
+void test_findNonSpaceReverse_1() {
+    char s[] = "a b   ";
+    assert(*findNonSpaceReverse(s + strlen_(s) - 1, s) == 'b');
+}
+
+void test_findNonSpaceReverse_2() {
+    char s[] = "a b";
+    assert(*findNonSpaceReverse(s + strlen_(s) - 1, s) == 'b');
+}
+
+void test_findNonSpaceReverse_3() {
+    char s[] = "a";
+    assert(*findNonSpaceReverse(s + strlen_(s) - 1, s) == 'a');
+}
+
+void test_findNonSpaceReverse() {
+    test_findNonSpaceReverse_1();
+    test_findNonSpaceReverse_2();
+    test_findNonSpaceReverse_3();
+}
+
+void test_findSpaceReverse_1() {
+    char s[] = "a b   ";
+    assert(findSpaceReverse(s + strlen_(s) - 1, s) == s + 5);
+}
+
+void test_findSpaceReverse_2() {
+    char s[] = "a b";
+    assert(findSpaceReverse(s + strlen_(s) - 1, s) == s + 1);
+}
+
+void test_findSpaceReverse_3() {
+    char s[] = " a";
+    assert(findSpaceReverse(s + strlen_(s) - 1, s) == s);
+}
+
+void test_findSpaceReverse_4() {
+    char s[] = "a";
+    assert(findSpaceReverse(s + strlen_(s) - 1, s) == s);
+}
+
+void test_findSpaceReverse() {
+    test_findSpaceReverse_1();
+    test_findSpaceReverse_2();
+    test_findSpaceReverse_3();
+    test_findSpaceReverse_4();
+}
+
+void test_getWordReverse() {
+    char s[] = "az";
+    char str[100];
+    WordDescriptor w;
+    getWordReverse(s + strlen_(s) - 1, s, &w);
+    wordDescriptorToString(w, str);
+    ASSERT_STRING("z", str);
+}
+
+void test_checkIfRepeatedWordInString_1() {
+    char s[] = "a a";
+
+    if (checkIfRepeatedWordsInString(s))
+        fprintf(stderr, "%s - OK\n", __FUNCTION__ );
+    else {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__ , __LINE__);
+    }
+}
+
+void test_checkIfRepeatedWordInString_2() {
+    char s[] = "a b";
+
+    if (!checkIfRepeatedWordsInString(s))
+        fprintf(stderr, "%s - OK\n", __FUNCTION__ );
+    else {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
+    }
+}
+
+void test_checkIfRepeatedWordInString_3() {
+    char s[] = "a b a";
+
+    if (checkIfRepeatedWordsInString(s))
+        fprintf(stderr, "%s - OK\n", __FUNCTION__ );
+    else {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
+    }
+}
+
+void test_checkIfRepeatedWordInString_4() {
+    char s[] = "";
+
+    if (!checkIfRepeatedWordsInString(s))
+        fprintf(stderr, "%s - OK\n", __FUNCTION__ );
+    else {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
+    }
+}
+
+void test_checkIfRepeatedWordInString() {
+    test_checkIfRepeatedWordInString_1();
+    test_checkIfRepeatedWordInString_2();
+    test_checkIfRepeatedWordInString_3();
+    test_checkIfRepeatedWordInString_4();
+}
+
 void test() {
     test_strcmp();
     test_removeSpaces();
@@ -492,12 +661,19 @@ void test() {
     test_getPalindromeWordsAmount();
     test_blendStrings();
     testAll_getWordBeforeFirstWordWithA();
+    test_lastWordInFirstStringInSecondString();
+    test_findNonSpaceReverse();
+    test_findSpaceReverse();
+    test_reverseWordsOrder();
+    test_checkIfRepeatedWordInString();
 }
 
 
 int main() {
-    //test();
+    test();
     //test_reverseWordsOrder();
+    //test_getWordReverse();
+    //test_checkIfRepeatedWordInString();
     //char s[] = "aa ab ac";
     //reverseWords(s);
 
