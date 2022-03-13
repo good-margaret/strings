@@ -72,4 +72,6 @@ WordDescriptor lastWordInFirstStringInSecondString(char *s1, char *s2);
 
 bool checkIfRepeatedWordsInString(char *s);
 
+bool isThereWordsWithSameLetters(char *s);
+
 #endif //STR_TASKS_H

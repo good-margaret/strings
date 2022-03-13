@@ -648,6 +648,57 @@ void test_checkIfRepeatedWordInString() {
     test_checkIfRepeatedWordInString_4();
 }
 
+void test_isThereWordsWithSameLetters_1() {
+    char s[] = "a a";
+
+    if (isThereWordsWithSameLetters(s))
+        fprintf(stderr, "%s - OK\n", __FUNCTION__ );
+    else {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
+    }
+}
+
+void test_isThereWordsWithSameLetters_2() {
+    char s[] = "a";
+
+    if (!isThereWordsWithSameLetters(s))
+        fprintf(stderr, "%s - OK\n", __FUNCTION__ );
+    else {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
+    }
+}
+
+void test_isThereWordsWithSameLetters_3() {
+    char s[] = "a b";
+
+    if (!isThereWordsWithSameLetters(s))
+        fprintf(stderr, "%s - OK\n", __FUNCTION__ );
+    else {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
+    }
+}
+
+void test_isThereWordsWithSameLetters_4() {
+    char s[] = "aba ava baa";
+
+    if (isThereWordsWithSameLetters(s))
+        fprintf(stderr, "%s - OK\n", __FUNCTION__ );
+    else {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
+    }
+}
+
+void test_isThereWordsWithSameLetters() {
+    test_isThereWordsWithSameLetters_1();
+    test_isThereWordsWithSameLetters_2();
+    test_isThereWordsWithSameLetters_3();
+    test_isThereWordsWithSameLetters_4();
+}
+
 void test() {
     test_strcmp();
     test_removeSpaces();
@@ -666,11 +717,13 @@ void test() {
     test_findSpaceReverse();
     test_reverseWordsOrder();
     test_checkIfRepeatedWordInString();
+    test_isThereWordsWithSameLetters();
 }
 
 
 int main() {
     test();
+    //test_isThereWordsWithSameLetters();
     //test_reverseWordsOrder();
     //test_getWordReverse();
     //test_checkIfRepeatedWordInString();

@@ -369,6 +369,7 @@ WordDescriptor lastWordInFirstStringInSecondString(char *s1, char *s2) {
 int compareWordsHardcore(const void *word1, const void *word2) {
     const WordDescriptor *w1 = word1;
     const WordDescriptor *w2 = word2;
+
     return memcmp(w1->begin, w2->begin, w1->end - w1->begin);
 }
 
@@ -383,4 +384,25 @@ bool checkIfRepeatedWordsInString(char *s) {
 
 
     return false;
+}
+
+int comp_char (const void *ch1, const void *ch2) {
+    char arg1 = *(char*)ch1;
+    char arg2 = *(char*)ch2;
+
+    return arg2 - arg1;
+}
+
+void sortLettersInWord(WordDescriptor word) {
+    qsort(word.begin, word.end - word.begin, sizeof(char), comp_char);
+}
+
+bool isThereWordsWithSameLetters(char *s) {
+    getBagOfWords(&_bag, s);
+
+    for (int i = 0; i < _bag.size; i++)
+        sortLettersInWord(_bag.words[i]);
+
+
+    return checkIfRepeatedWordsInString(s);
 }
