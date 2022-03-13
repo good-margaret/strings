@@ -386,9 +386,9 @@ bool checkIfRepeatedWordsInString(char *s) {
     return false;
 }
 
-int comp_char (const void *ch1, const void *ch2) {
-    char arg1 = *(char*)ch1;
-    char arg2 = *(char*)ch2;
+int comp_char(const void *ch1, const void *ch2) {
+    char arg1 = *(char *) ch1;
+    char arg2 = *(char *) ch2;
 
     return arg2 - arg1;
 }
@@ -403,6 +403,28 @@ bool isThereWordsWithSameLetters(char *s) {
     for (int i = 0; i < _bag.size; i++)
         sortLettersInWord(_bag.words[i]);
 
-
     return checkIfRepeatedWordsInString(s);
+}
+
+char *getStringWithoutLastWord(char *s) {
+    char *str = (char *) malloc(strlen_(s));
+    *str = '\0';
+
+    getBagOfWords(&_bag, s);
+    if (_bag.size > 1) {
+        WordDescriptor lastWord = _bag.words[_bag.size - 1];
+
+        char *iWrite = str;
+        for (int i = 0; i < _bag.size - 1; i++)
+            if (!areEqualWords(_bag.words[i], lastWord)) {
+                int wordLen = _bag.words[i].end - _bag.words[i].begin;
+                memcpy(iWrite, _bag.words[i].begin, wordLen);
+                iWrite += wordLen;
+                *iWrite++ = ' ';
+            }
+
+        *(iWrite - 1) = '\0';
+    }
+
+    return str;
 }

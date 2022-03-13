@@ -699,6 +699,59 @@ void test_isThereWordsWithSameLetters() {
     test_isThereWordsWithSameLetters_4();
 }
 
+void test_getStringWithoutLastWord_1() {
+    char s[] = "a a a";
+    char *resStr = getStringWithoutLastWord(s);
+
+    ASSERT_STRING("", resStr);
+
+    free(resStr);
+}
+
+void test_getStringWithoutLastWord_2() {
+    char s[] = "a b a";
+    char *resStr = getStringWithoutLastWord(s);
+
+    ASSERT_STRING("b", resStr);
+
+    free(resStr);
+}
+
+void test_getStringWithoutLastWord_3() {
+    char s[] = "ab ba a";
+    char *resStr = getStringWithoutLastWord(s);
+
+    ASSERT_STRING("ab ba", resStr);
+
+    free(resStr);
+}
+
+void test_getStringWithoutLastWord_4() {
+    char s[] = "a a aa";
+    char *resStr = getStringWithoutLastWord(s);
+
+    ASSERT_STRING("a a", resStr);
+
+    free(resStr);
+}
+
+void test_getStringWithoutLastWord_5() {
+    char s[] = "ar ra ar";
+    char *resStr = getStringWithoutLastWord(s);
+
+    ASSERT_STRING("ra", resStr);
+
+    free(resStr);
+}
+
+void test_getStringWithoutLastWord() {
+    test_getStringWithoutLastWord_1();
+    test_getStringWithoutLastWord_2();
+    test_getStringWithoutLastWord_3();
+    test_getStringWithoutLastWord_4();
+    test_getStringWithoutLastWord_5();
+}
+
 void test() {
     test_strcmp();
     test_removeSpaces();
@@ -718,11 +771,13 @@ void test() {
     test_reverseWordsOrder();
     test_checkIfRepeatedWordInString();
     test_isThereWordsWithSameLetters();
+    test_getStringWithoutLastWord();
 }
 
 
 int main() {
     test();
+    //test_getStringWithoutLastWord();
     //test_isThereWordsWithSameLetters();
     //test_reverseWordsOrder();
     //test_getWordReverse();

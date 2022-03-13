@@ -74,4 +74,6 @@ bool checkIfRepeatedWordsInString(char *s);
 
 bool isThereWordsWithSameLetters(char *s);
 
+char *getStringWithoutLastWord(char *s);
+
 #endif //STR_TASKS_H
