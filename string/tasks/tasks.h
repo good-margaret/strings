@@ -25,6 +25,12 @@ typedef enum WordBeforeFirstWordWithAReturnCode {
     EMPTY_STRING
 } WordBeforeFirstWordWithAReturnCode;
 
+typedef enum WordBeforeLastCommonWordCode {
+    FIRST_WORD,
+    NO_COMMON_WORD,
+    WORD_FOUND_OK,
+} WordBeforeFirstCommonWordCode;
+
 char stringBuffer[MAX_STRING_SIZE + 1];
 
 BagOfWords _bag;
@@ -68,12 +74,14 @@ void reverseWordsOrder(char *s);
 
 void wordDescriptorToString(WordDescriptor word, char *destination);
 
-WordDescriptor lastWordInFirstStringInSecondString(char *s1, char *s2);
+bool lastWordInFirstStringInSecondString(char *s1, char *s2, WordDescriptor *word);
 
 bool checkIfRepeatedWordsInString(char *s);
 
 bool isThereWordsWithSameLetters(char *s);
 
 char *getStringWithoutLastWord(char *s);
+
+WordBeforeFirstCommonWordCode getWordBeforeFirstCommonWord(char *s1, char *s2, WordDescriptor *word);
 
 #endif //STR_TASKS_H

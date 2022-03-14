@@ -500,37 +500,68 @@ void testAll_getWordBeforeFirstWordWithA() {
 void test_lastWordInFirstStringInSecondString_1() {
     char s1[] = "a b c";
     char s2[] = "a c b";
-    WordDescriptor word = lastWordInFirstStringInSecondString(s1, s2);
-    char string[100];
-    wordDescriptorToString(word, string);
-    ASSERT_STRING ("c", string);
+    WordDescriptor w;
+    if (!lastWordInFirstStringInSecondString(s1, s2, &w)) {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
+    } else {
+        char string[100];
+        wordDescriptorToString(w, string);
+        ASSERT_STRING ("c", string);
+    }
 }
 
 void test_lastWordInFirstStringInSecondString_2() {
     char s1[] = "a b c";
     char s2[] = "a n m";
-    WordDescriptor word = lastWordInFirstStringInSecondString(s1, s2);
-    char string[100];
-    wordDescriptorToString(word, string);
-    ASSERT_STRING ("a", string);
+    WordDescriptor w;
+    if (!lastWordInFirstStringInSecondString(s1, s2, &w)) {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
+    } else {
+        char string[100];
+        wordDescriptorToString(w, string);
+        ASSERT_STRING ("a", string);
+    }
 }
 
 void test_lastWordInFirstStringInSecondString_3() {
     char s1[] = "a b c";
     char s2[] = "b n m";
-    WordDescriptor word = lastWordInFirstStringInSecondString(s1, s2);
-    char string[100];
-    wordDescriptorToString(word, string);
-    ASSERT_STRING ("b", string);
+    WordDescriptor w;
+    if (!lastWordInFirstStringInSecondString(s1, s2, &w)) {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
+    } else {
+        char string[100];
+        wordDescriptorToString(w, string);
+        ASSERT_STRING ("b", string);
+    }
 }
 
 void test_lastWordInFirstStringInSecondString_4() {
     char s1[] = "aa ab ac";
     char s2[] = "ab an am";
-    WordDescriptor word = lastWordInFirstStringInSecondString(s1, s2);
-    char string[100];
-    wordDescriptorToString(word, string);
-    ASSERT_STRING ("ab", string);
+    WordDescriptor w;
+    if (!lastWordInFirstStringInSecondString(s1, s2, &w)) {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
+    } else {
+        char string[100];
+        wordDescriptorToString(w, string);
+        ASSERT_STRING ("ab", string);
+    }
+}
+
+void test_lastWordInFirstStringInSecondString_5() {
+    char s1[] = "a b c";
+    char s2[] = "m n h";
+    WordDescriptor w;
+    if (lastWordInFirstStringInSecondString(s1, s2, &w)) {
+        fprintf(stderr, " File %s\n", __FILE__);
+        fprintf(stderr, "%s - failed on line %d\n", __FUNCTION__, __LINE__);
+    } else
+        fprintf(stderr, "%s - OK\n", __FUNCTION__ );
 }
 
 void test_lastWordInFirstStringInSecondString() {
@@ -538,6 +569,7 @@ void test_lastWordInFirstStringInSecondString() {
     test_lastWordInFirstStringInSecondString_2();
     test_lastWordInFirstStringInSecondString_3();
     test_lastWordInFirstStringInSecondString_4();
+    test_lastWordInFirstStringInSecondString_5();
 }
 
 void test_findNonSpaceReverse_1() {
@@ -752,6 +784,30 @@ void test_getStringWithoutLastWord() {
     test_getStringWithoutLastWord_5();
 }
 
+void testAll_getWordBeforeLastCommon() {
+    WordDescriptor w;
+
+    char s11[] = "c b a";
+    char s21[] = "a b c";
+
+    assert (getWordBeforeFirstCommonWord(s11, s21, &w)
+            == FIRST_WORD);
+
+    char s12[] = "n k l";
+    char s22[] = "a b c";
+
+    assert (getWordBeforeFirstCommonWord(s12, s22, &w) == NO_COMMON_WORD);
+
+    char s13[] = "n k k";
+    char s23[] = "a b k";
+
+    assert (getWordBeforeFirstCommonWord(s13, s23, &w) == WORD_FOUND_OK);
+    char s[MAX_WORD_SIZE];
+    wordDescriptorToString(w, s);
+
+    ASSERT_STRING ("n", s);
+}
+
 void test() {
     test_strcmp();
     test_removeSpaces();
@@ -772,12 +828,13 @@ void test() {
     test_checkIfRepeatedWordInString();
     test_isThereWordsWithSameLetters();
     test_getStringWithoutLastWord();
+    testAll_getWordBeforeLastCommon();
 }
 
 
 int main() {
     test();
-    //test_getStringWithoutLastWord();
+
     //test_isThereWordsWithSameLetters();
     //test_reverseWordsOrder();
     //test_getWordReverse();

@@ -217,8 +217,6 @@ bool getWordComas(char *s, WordDescriptor *word) {
 
     word->end = find(s, s + strlen_(s), ',');
 
-    //printf("%d\n", word->end - word->begin);
-
     return true;
 }
 
@@ -348,7 +346,7 @@ bool isWordInBag(WordDescriptor word, BagOfWords bag) {
     return false;
 }
 
-WordDescriptor lastWordInFirstStringInSecondString(char *s1, char *s2) {
+bool lastWordInFirstStringInSecondString(char *s1, char *s2, WordDescriptor *word) {
     getBagOfWords(&_bag, s1);
     getBagOfWords(&_bag2, s2);
 
@@ -360,9 +358,11 @@ WordDescriptor lastWordInFirstStringInSecondString(char *s1, char *s2) {
     }
 
     if (maxIndex == -1)
-        fprintf(stderr, "No correlations");
+        return false;
 
-    return _bag.words[maxIndex];
+    *word = _bag.words[maxIndex];
+
+    return true;
 }
 
 
@@ -427,4 +427,32 @@ char *getStringWithoutLastWord(char *s) {
     }
 
     return str;
+}
+
+int firstWordInFirstBagInSecondBagIndex(BagOfWords b1, BagOfWords b2) {
+    int maxIndex = -1;
+
+    int i = 0;
+    while (i < b1.size && maxIndex == -1) {
+        if (isWordInBag(b1.words[i], b2))
+            maxIndex = i;
+
+        i++;
+    }
+
+    return maxIndex;
+}
+
+WordBeforeFirstCommonWordCode getWordBeforeFirstCommonWord (char *s1, char *s2, WordDescriptor *word) {
+    getBagOfWords(&_bag, s1);
+    getBagOfWords(&_bag2, s2);
+
+    int firstCommonWordIndex = firstWordInFirstBagInSecondBagIndex(_bag, _bag2);
+    if (firstCommonWordIndex > 0) {
+        *word = _bag.words[firstCommonWordIndex - 1];
+        return WORD_FOUND_OK;
+    } else if (firstCommonWordIndex == 0)
+        return FIRST_WORD;
+    else
+        return NO_COMMON_WORD;
 }
