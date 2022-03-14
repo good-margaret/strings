@@ -26,6 +26,18 @@ limits.h
 stdbool.h
 -
 
+C:/Users/1/CLionProjects/str/string/tasks/tasks.c
+tasks.h
+C:/Users/1/CLionProjects/str/string/tasks/tasks.h
+ctype.h
+-
+memory.h
+-
+malloc.h
+-
+stdlib.h
+-
+
 C:/Users/1/CLionProjects/str/string/tasks/tasks.h
 stdbool.h
 -

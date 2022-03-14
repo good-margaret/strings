@@ -808,6 +808,39 @@ void testAll_getWordBeforeLastCommon() {
     ASSERT_STRING ("n", s);
 }
 
+void test_deleteWorstContainingTheseSymbols_1() {
+    char s[] = "a s a";
+    char symbols[] = "a";
+
+    deleteWorstContainingTheseSymbols(s, symbols);
+
+    ASSERT_STRING("s", s);
+}
+
+void test_deleteWorstContainingTheseSymbols_2() {
+    char s[] = "ara era";
+    char symbols[] = "ra";
+
+    deleteWorstContainingTheseSymbols(s, symbols);
+
+    ASSERT_STRING("", s);
+}
+
+void test_deleteWorstContainingTheseSymbols_3() {
+    char s[] = "ara era";
+    char symbols[] = "ar";
+
+    deleteWorstContainingTheseSymbols(s, symbols);
+
+    ASSERT_STRING("era", s);
+}
+
+void test_deleteWorstContainingTheseSymbols() {
+    test_deleteWorstContainingTheseSymbols_1();
+    test_deleteWorstContainingTheseSymbols_2();
+    test_deleteWorstContainingTheseSymbols_3();
+}
+
 void test() {
     test_strcmp();
     test_removeSpaces();
@@ -829,12 +862,13 @@ void test() {
     test_isThereWordsWithSameLetters();
     test_getStringWithoutLastWord();
     testAll_getWordBeforeLastCommon();
+    test_deleteWorstContainingTheseSymbols();
 }
 
 
 int main() {
     test();
-
+    //test_deleteWorstContainingTheseSymbols();
     //test_isThereWordsWithSameLetters();
     //test_reverseWordsOrder();
     //test_getWordReverse();

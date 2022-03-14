@@ -84,4 +84,6 @@ char *getStringWithoutLastWord(char *s);
 
 WordBeforeFirstCommonWordCode getWordBeforeFirstCommonWord(char *s1, char *s2, WordDescriptor *word);
 
+void deleteWorstContainingTheseSymbols(char *s, char *symbols);
+
 #endif //STR_TASKS_H

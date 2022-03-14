@@ -443,7 +443,7 @@ int firstWordInFirstBagInSecondBagIndex(BagOfWords b1, BagOfWords b2) {
     return maxIndex;
 }
 
-WordBeforeFirstCommonWordCode getWordBeforeFirstCommonWord (char *s1, char *s2, WordDescriptor *word) {
+WordBeforeFirstCommonWordCode getWordBeforeFirstCommonWord(char *s1, char *s2, WordDescriptor *word) {
     getBagOfWords(&_bag, s1);
     getBagOfWords(&_bag2, s2);
 
@@ -455,4 +455,40 @@ WordBeforeFirstCommonWordCode getWordBeforeFirstCommonWord (char *s1, char *s2, 
         return FIRST_WORD;
     else
         return NO_COMMON_WORD;
+}
+
+bool isCharSubset(WordDescriptor set, char *subset) {
+    size_t subsetLen = strlen_(subset);
+
+    char *endSet = set.end - subsetLen + 1;
+    while (set.begin < endSet) {
+        int j = 0;
+        while (j < subsetLen && *(set.begin + j) == *(subset + j))
+            j++;
+
+        if (j == subsetLen)
+            return true;
+
+        set.begin++;
+    }
+
+    return false;
+}
+
+void deleteWorstContainingTheseSymbols(char *s, char *symbols) {
+    getBagOfWords(&_bag, s);
+
+    char str[MAX_STRING_SIZE];
+    *str = '\0';
+
+    char *strIndex = str;
+    for (int i = 0; i < _bag.size; i++)
+        if (!isCharSubset(_bag.words[i], symbols)) {
+            strIndex = copy(_bag.words[i].begin, _bag.words[i].end, strIndex);
+            *strIndex++ = ' ';
+        }
+
+    *(strIndex - 1) = '\0';
+
+    copy(str, strIndex + 1, s);
 }
