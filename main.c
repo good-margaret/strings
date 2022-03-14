@@ -841,6 +841,49 @@ void test_deleteWorstContainingTheseSymbols() {
     test_deleteWorstContainingTheseSymbols_3();
 }
 
+void test_makeEqualWordNumberStrings_1() {
+    char s1[MAX_STRING_SIZE] = "m a";
+    char s2[MAX_STRING_SIZE] = "n o r g o";
+
+    makeEqualWordNumberStrings(s1, s2);
+
+    ASSERT_STRING("m a r g o", s1);
+}
+
+void test_makeEqualWordNumberStrings_2() {
+    char s1[MAX_STRING_SIZE] = "";
+    char s2[MAX_STRING_SIZE] = "m a r g o";
+
+    makeEqualWordNumberStrings(s1, s2);
+
+    ASSERT_STRING("m a r g o", s1);
+}
+
+void test_makeEqualWordNumberStrings_3() {
+    char s1[MAX_STRING_SIZE] = "m a";
+    char s2[MAX_STRING_SIZE] = "n o";
+
+    makeEqualWordNumberStrings(s1, s2);
+
+    ASSERT_STRING("m a", s1);
+}
+
+void test_makeEqualWordNumberStrings_4() {
+    char s2[MAX_STRING_SIZE] = "m a";
+    char s1[MAX_STRING_SIZE] = "n o r g o";
+
+    makeEqualWordNumberStrings(s1, s2);
+
+    ASSERT_STRING("m a r g o", s2);
+}
+
+void test_makeEqualWordNumberStrings() {
+    test_makeEqualWordNumberStrings_1();
+    test_makeEqualWordNumberStrings_2();
+    test_makeEqualWordNumberStrings_3();
+    test_makeEqualWordNumberStrings_4();
+}
+
 void test() {
     test_strcmp();
     test_removeSpaces();
@@ -867,7 +910,8 @@ void test() {
 
 
 int main() {
-    test();
+    //test();
+    test_makeEqualWordNumberStrings();
     //test_deleteWorstContainingTheseSymbols();
     //test_isThereWordsWithSameLetters();
     //test_reverseWordsOrder();

@@ -492,3 +492,37 @@ void deleteWorstContainingTheseSymbols(char *s, char *symbols) {
 
     copy(str, strIndex + 1, s);
 }
+
+size_t max(size_t a, size_t b) {
+    return a > b ? a : b;
+}
+
+size_t min(size_t a, size_t b) {
+    return a < b ? a : b;
+}
+
+void swapBagsOfWords(BagOfWords *b1, BagOfWords *b2) {
+    BagOfWords t = *b1;
+    *b1 = *b2;
+    *b2 = t;
+}
+
+void makeEqualWordNumberStrings(char *s1, char *s2) {
+    getBagOfWords(&_bag, s1);
+    getBagOfWords(&_bag2, s2);
+
+    if (_bag.size > _bag2.size)
+        swapBagsOfWords(&_bag, &_bag2);
+
+    if (_bag.size < _bag2.size) {
+        char *copyStart;
+        if (_bag.size == 0)
+            copyStart = s1;
+        else {
+            *_bag.words[_bag.size - 1].end = ' ';
+            copyStart = _bag.words[_bag.size - 1].end + 1;
+        }
+
+        copy(_bag2.words[_bag.size].begin, _bag2.words[_bag2.size - 1].end + 1, copyStart);
+    }
+}

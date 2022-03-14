@@ -86,4 +86,6 @@ WordBeforeFirstCommonWordCode getWordBeforeFirstCommonWord(char *s1, char *s2, W
 
 void deleteWorstContainingTheseSymbols(char *s, char *symbols);
 
+void makeEqualWordNumberStrings(char *s1, char *s2);
+
 #endif //STR_TASKS_H
